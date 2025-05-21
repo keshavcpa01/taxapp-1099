@@ -1,0 +1,7 @@
+# Developer tools only (not needed in production)
+
+black           # auto-formatter
+isort           # import sorter
+mypy            # static type checker
+pytest          # testing framework
+httpx           # HTTP client for testing FastAPI

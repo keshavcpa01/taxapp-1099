@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Format Code (black + isort)",
+      "type": "shell",
+      "command": "black . && isort .",
+      "options": {
+        "shell": {
+          "executable": "bash"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Lint Code (mypy)",
+      "type": "shell",
+      "command": "mypy backend",
+      "options": {
+        "shell": {
+          "executable": "bash"
+        }
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Run Tests (pytest)",
+      "type": "shell",
+      "command": "pytest",
+      "options": {
+        "shell": {
+          "executable": "bash"
+        }
+      },
+      "group": "test",
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}
