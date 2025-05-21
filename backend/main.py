@@ -1,16 +1,15 @@
-from fastapi import FastAPI, Depends
-from fastapi.middleware.cors import CORSMiddleware
-from . import auth, submissions, models
-from .database import Base, engine
-from .models import User
-from .security import get_current_user
+# backend/main.py
 
-# Create tables
-Base.metadata.create_all(bind=engine)
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from . import auth, submissions  # adjust imports as needed
+from .config import settings
 
 app = FastAPI()
 
-# CORS settings
+# Print to verify it's working (optional)
+print("DB URL:", settings.DATABASE_URL)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,7 +18,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Routers
 app.include_router(auth.router)
 app.include_router(submissions.router)
 
@@ -27,6 +25,9 @@ app.include_router(submissions.router)
 def ping():
     return {"message": "pong"}
 
-@app.get("/users/me")
-def read_current_user(current_user: User = Depends(get_current_user)):
-    return current_user
+@app.get("/config-check")
+def config_check():
+    return {
+        "database_url": settings.DATABASE_URL,
+        "sender_email": settings.SENDER_EMAIL
+    }
