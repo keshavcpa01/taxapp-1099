@@ -1,0 +1,1 @@
+const SubmissionSuccess: React.FC = () => <div>Submission Success Page</div>; export default SubmissionSuccess;

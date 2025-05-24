@@ -1,0 +1,1 @@
+const Print1099: React.FC = () => <div>Printable 1099 Page</div>; export default Print1099;

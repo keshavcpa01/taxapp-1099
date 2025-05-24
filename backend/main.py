@@ -1,26 +1,30 @@
-# backend/main.py
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from . import auth, submissions  # adjust imports as needed
-from .config import settings
+from fastapi.security import OAuth2PasswordBearer
+from backend.routers import auth, submissions
+from backend.config import settings
+from dotenv import load_dotenv
+load_dotenv()
+
+
+# ✅ Basic token URL for FastAPI's built-in Swagger Auth
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 app = FastAPI()
 
-# Print to verify it's working (optional)
-print("DB URL:", settings.DATABASE_URL)
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Allow frontend origin in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# ✅ Routers
 app.include_router(auth.router)
 app.include_router(submissions.router)
 
+# ✅ Health check
 @app.get("/ping")
 def ping():
     return {"message": "pong"}
@@ -29,5 +33,5 @@ def ping():
 def config_check():
     return {
         "database_url": settings.DATABASE_URL,
-        "sender_email": settings.SENDER_EMAIL
+        "sender_email": settings.SENDER_EMAIL,
     }

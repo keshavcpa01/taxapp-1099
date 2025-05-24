@@ -1,0 +1,1 @@
+const SubmissionsTable: React.FC = () => <div>Submissions Table Page</div>; export default SubmissionsTable;

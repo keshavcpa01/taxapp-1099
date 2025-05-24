@@ -1,5 +1,1 @@
-import React from 'react';
-const ForgotPassword = () => {
-  return <div className="text-center p-4">Forgot Password Page (To be implemented)</div>;
-};
-export default ForgotPassword;
+const ForgotPassword: React.FC = () => <div>Forgot Password Page</div>; export default ForgotPassword;

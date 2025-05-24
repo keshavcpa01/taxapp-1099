@@ -1,0 +1,1 @@
+const EmailPDF: React.FC = () => <div>Email PDF Page</div>; export default EmailPDF;
